@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fdfcfb 100%);
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 60%, #fce4ec 100%);
             min-height: 100vh;
             overflow-x: hidden;
             user-select: none;
@@ -16,294 +16,173 @@
 
         .header {
             text-align: center;
-            padding: 1rem 0 0.5rem;
+            padding: 0.8rem 0 0.3rem;
         }
-        .header h1 { font-size: 1.6rem; color: #e91e8c; text-shadow: 1px 1px 0 #fff; }
-        .header p { font-size: 0.9rem; color: #c2185b; margin-top: 0.2rem; }
+        .header h1 { font-size: 1.5rem; color: #e91e8c; text-shadow: 1px 1px 0 #fff; }
+        .header p { font-size: 0.85rem; color: #c2185b; margin-top: 0.15rem; }
 
         .game-area {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0.5rem;
-            gap: 0.8rem;
+            padding: 0.3rem;
+            gap: 0.6rem;
         }
 
-        /* 芭比娃娃区域 */
+        /* 芭比娃娃容器 */
         .doll-container {
             position: relative;
-            width: 200px;
-            height: 380px;
-            background: rgba(255,255,255,0.6);
+            width: 240px;
+            height: 420px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(255,240,245,0.4) 100%);
             border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(233,30,140,0.15);
+            box-shadow: 0 8px 40px rgba(233,30,140,0.2), inset 0 0 30px rgba(255,255,255,0.5);
             overflow: hidden;
         }
 
-        /* 芭比娃娃用纯 CSS 绘制 */
-        .doll {
+        /* SVG 芭比娃娃 */
+        .doll-svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
 
-        /* 头部 */
-        .doll-head {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 80px;
-            background: #fdd9b5;
-            border-radius: 50% 50% 45% 45%;
-            z-index: 5;
-        }
-        .doll-hair {
-            position: absolute;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 55px;
-            background: #4a2c0a;
-            border-radius: 50% 50% 30% 30%;
-            z-index: 6;
-        }
-        .doll-hair-long {
-            position: absolute;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 75px;
-            height: 80px;
-            background: #4a2c0a;
-            border-radius: 0 0 40% 40%;
-            z-index: 4;
-        }
-        .doll-eye {
-            position: absolute;
-            top: 45px;
-            width: 10px;
-            height: 12px;
-            background: #2c1810;
-            border-radius: 50%;
-            z-index: 7;
-        }
-        .doll-eye.left { left: 68px; }
-        .doll-eye.right { left: 98px; }
-        .doll-eye::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-        }
-        .doll-mouth {
-            position: absolute;
-            top: 62px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 15px;
-            height: 8px;
-            background: #e91e63;
-            border-radius: 0 0 50% 50%;
-            z-index: 7;
-        }
-        .doll-blush {
-            position: absolute;
-            top: 55px;
-            width: 14px;
-            height: 8px;
-            background: rgba(255,150,150,0.5);
-            border-radius: 50%;
-            z-index: 7;
-        }
-        .doll-blush.left { left: 58px; }
-        .doll-blush.right { left: 105px; }
-
-        /* 脖子 */
-        .doll-neck {
-            position: absolute;
-            top: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 15px;
-            background: #fdd9b5;
-            z-index: 3;
-        }
-
-        /* 身体 */
-        .doll-body {
-            position: absolute;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 65px;
-            height: 100px;
-            background: #fdd9b5;
-            border-radius: 20px 20px 5px 5px;
-            z-index: 3;
-        }
-
-        /* 衣服层 */
+        /* 衣服覆盖层 */
         .clothing-layer {
             position: absolute;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 8;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 15;
             pointer-events: none;
-            transition: all 0.3s ease;
         }
-
-        /* 手臂 */
-        .doll-arm {
-            position: absolute;
-            top: 105px;
-            width: 18px;
-            height: 85px;
-            background: #fdd9b5;
-            border-radius: 10px;
-            z-index: 2;
-        }
-        .doll-arm.left { left: 42px; transform: rotate(10deg); }
-        .doll-arm.right { right: 42px; transform: rotate(-10deg); }
-
-        /* 腿 */
-        .doll-leg {
-            position: absolute;
-            top: 195px;
-            width: 22px;
-            height: 110px;
-            background: #fdd9b5;
-            border-radius: 10px 10px 8px 8px;
-            z-index: 2;
-        }
-        .doll-leg.left { left: 72px; }
-        .doll-leg.right { left: 106px; }
 
         /* 鞋子层 */
         .shoes-layer {
             position: absolute;
-            top: 295px;
-            z-index: 9;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 16;
+            pointer-events: none;
+        }
+
+        /* 配饰层 */
+        .accessory-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
             pointer-events: none;
         }
 
         /* 衣服选项区域 */
         .options-panel {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
         }
 
         .category-tabs {
             display: flex;
-            gap: 0.4rem;
+            gap: 0.35rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
         .tab-btn {
-            padding: 0.4rem 0.8rem;
+            padding: 0.35rem 0.7rem;
             border: 2px solid #e91e8c;
             background: white;
             color: #e91e8c;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(233,30,140,0.1);
         }
         .tab-btn.active, .tab-btn:active {
-            background: #e91e8c;
+            background: linear-gradient(135deg, #e91e8c, #f06292);
             color: white;
+            border-color: #e91e8c;
         }
 
         .items-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
+            gap: 0.4rem;
             padding: 0.5rem;
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.85);
             border-radius: 16px;
             backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .item-card {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0.5rem 0.2rem;
+            padding: 0.4rem 0.2rem;
             border-radius: 12px;
             background: white;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             border: 2px solid transparent;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
         .item-card:active, .item-card.selected {
-            transform: scale(0.95);
+            transform: scale(0.93);
             border-color: #e91e8c;
-            box-shadow: 0 2px 12px rgba(233,30,140,0.3);
+            box-shadow: 0 2px 15px rgba(233,30,140,0.35);
         }
-        .item-card .icon { font-size: 2rem; }
-        .item-card .name { font-size: 0.7rem; color: #666; margin-top: 0.2rem; text-align: center; }
+        .item-card .icon { font-size: 1.8rem; line-height: 1; }
+        .item-card .name { font-size: 0.65rem; color: #666; margin-top: 0.15rem; text-align: center; line-height: 1.2; }
 
-        /* 操作按钮 */
         .actions {
             display: flex;
             gap: 0.8rem;
             justify-content: center;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
         .action-btn {
-            padding: 0.6rem 1.5rem;
+            padding: 0.55rem 1.4rem;
             border: none;
             border-radius: 25px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
         }
         .action-btn.random {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #e91e8c, #f06292);
             color: white;
+            box-shadow: 0 4px 15px rgba(233,30,140,0.3);
         }
         .action-btn.reset {
-            background: #eee;
-            color: #666;
+            background: white;
+            color: #999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .action-btn:active { transform: scale(0.95); }
+        .action-btn:active { transform: scale(0.93); }
 
         .back-link {
             text-align: center;
-            padding: 1rem;
+            padding: 0.6rem;
         }
         .back-link a {
             color: #e91e8c;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        /* 衣服预览样式 - 用 emoji + CSS 实现 */
-        .outfit-preview {
-            position: absolute;
-            z-index: 10;
-            font-size: 1.2rem;
-            pointer-events: none;
-        }
-
-        /* 响应式 */
         @media (max-width: 360px) {
             .items-grid { grid-template-columns: repeat(3, 1fr); }
-            .doll-container { width: 170px; height: 340px; }
+            .doll-container { width: 200px; height: 360px; }
         }
     </style>
 </head>
@@ -316,32 +195,245 @@
     <div class="game-area">
         <!-- 芭比娃娃 -->
         <div class="doll-container" id="dollContainer">
-            <div class="doll">
-                <!-- 头发 -->
-                <div class="doll-hair" id="hair"></div>
-                <div class="doll-hair-long" id="hairLong"></div>
-                <!-- 头 -->
-                <div class="doll-head"></div>
-                <div class="doll-eye left"></div>
-                <div class="doll-eye right"></div>
-                <div class="doll-mouth"></div>
-                <div class="doll-blush left"></div>
-                <div class="doll-blush right"></div>
-                <!-- 脖子 -->
-                <div class="doll-neck"></div>
-                <!-- 身体 -->
-                <div class="doll-body"></div>
-                <!-- 手臂 -->
-                <div class="doll-arm left"></div>
-                <div class="doll-arm right"></div>
-                <!-- 腿 -->
-                <div class="doll-leg left"></div>
-                <div class="doll-leg right"></div>
-                <!-- 衣服覆盖层 -->
-                <div class="clothing-layer" id="clothingLayer"></div>
-                <!-- 鞋子层 -->
-                <div class="shoes-layer" id="shoesLayer"></div>
-            </div>
+            <!-- 基础娃娃 SVG -->
+            <svg class="doll-svg" viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- 皮肤渐变 -->
+                    <radialGradient id="skinGrad" cx="50%" cy="40%" r="50%">
+                        <stop offset="0%" style="stop-color:#fde8d0"/>
+                        <stop offset="100%" style="stop-color:#f5d0b0"/>
+                    </radialGradient>
+                    <!-- 头发渐变 -->
+                    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f5d76e"/>
+                        <stop offset="30%" style="stop-color:#f0c040"/>
+                        <stop offset="70%" style="stop-color:#e8b830"/>
+                        <stop offset="100%" style="stop-color:#d4a020"/>
+                    </linearGradient>
+                    <!-- 头发高光 -->
+                    <linearGradient id="hairShine" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#f5d76e;stop-opacity:0"/>
+                        <stop offset="40%" style="stop-color:#fff8dc;stop-opacity:0.6"/>
+                        <stop offset="60%" style="stop-color:#fff8dc;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:#f5d76e;stop-opacity:0"/>
+                    </linearGradient>
+                    <!-- 嘴唇渐变 -->
+                    <linearGradient id="lipGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b8a"/>
+                        <stop offset="100%" style="stop-color:#e91e63"/>
+                    </linearGradient>
+                    <!-- 腮红 -->
+                    <radialGradient id="blushGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#ff8a9e;stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:#ff8a9e;stop-opacity:0"/>
+                    </radialGradient>
+                    <!-- 身体阴影 -->
+                    <linearGradient id="bodyShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#e8c49a;stop-opacity:0.3"/>
+                        <stop offset="30%" style="stop-color:transparent;stop-opacity:0"/>
+                        <stop offset="70%" style="stop-color:transparent;stop-opacity:0"/>
+                        <stop offset="100%" style="stop-color:#e8c49a;stop-opacity:0.3"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- ========== 头发后层 ========== -->
+                <path d="M95,35 Q105,10 135,12 Q165,14 170,40 Q172,55 168,80 L165,120 Q162,140 155,155 Q148,160 142,158 L138,130 Q135,110 135,90 L135,70 Q140,50 130,38 Q120,30 100,35Z" fill="url(#hairGrad)" opacity="0.9"/>
+
+                <!-- 马尾辫 -->
+                <path d="M140,25 Q155,20 160,35 Q165,55 162,80 Q158,110 155,140 Q152,160 155,175 Q158,185 150,190 Q142,185 145,170 Q148,150 150,130 Q152,110 150,85 Q148,60 142,45 Q138,35 140,25Z" fill="url(#hairGrad)"/>
+                <!-- 马尾高光 -->
+                <path d="M148,30 Q155,40 155,60 Q154,80 152,100" stroke="url(#hairShine)" stroke-width="3" fill="none" opacity="0.5"/>
+
+                <!-- 蝴蝶结 -->
+                <path d="M135,28 Q125,18 118,25 Q115,30 120,33 Q125,35 130,32Z" fill="#ff69b4"/>
+                <path d="M135,28 Q145,18 152,25 Q155,30 150,33 Q145,35 140,32Z" fill="#ff69b4"/>
+                <circle cx="135" cy="29" r="3" fill="#ff1493"/>
+                <!-- 蝴蝶结阴影 -->
+                <path d="M125,22 Q120,20 118,25" stroke="#d4508a" stroke-width="0.8" fill="none"/>
+
+                <!-- ========== 脖子 ========== -->
+                <rect x="114" y="105" width="16" height="18" rx="8" fill="url(#skinGrad)"/>
+
+                <!-- ========== 身体 ========== -->
+                <!-- 躯干 -->
+                <path d="M95,118 Q92,125 90,140 Q88,160 92,180 L95,195 L145,195 L148,180 Q152,160 150,140 Q148,125 145,118Z" fill="url(#skinGrad)"/>
+                <!-- 身体侧面阴影 -->
+                <path d="M95,118 Q92,125 90,140 Q88,160 92,180 L95,195 L100,195 L98,180 Q96,160 97,140 Q98,125 100,118Z" fill="url(#bodyShadow)"/>
+                <path d="M145,118 Q148,125 150,140 Q152,160 148,180 L145,195 L140,195 L142,180 Q144,160 143,140 Q142,125 140,118Z" fill="url(#bodyShadow)"/>
+                <!-- 锁骨 -->
+                <path d="M105,122 Q115,126 120,125 Q125,126 135,122" stroke="#e8c49a" stroke-width="0.8" fill="none" opacity="0.5"/>
+                <!-- 肚脐 -->
+                <ellipse cx="120" cy="175" rx="2" ry="2.5" fill="#e8c49a" opacity="0.4"/>
+
+                <!-- ========== 手臂 ========== -->
+                <!-- 左臂 -->
+                <path d="M95,120 Q85,125 80,140 Q76,155 78,175 Q80,185 85,190 Q88,185 87,175 Q86,160 88,145 Q90,132 95,125Z" fill="url(#skinGrad)"/>
+                <!-- 左手 -->
+                <ellipse cx="83" cy="192" rx="8" ry="6" fill="url(#skinGrad)"/>
+                <!-- 左手指 -->
+                <ellipse cx="77" cy="190" rx="3" ry="4" fill="#f5d0b0" transform="rotate(-15,77,190)"/>
+                <ellipse cx="80" cy="188" rx="2.5" ry="4" fill="#f5d0b0" transform="rotate(-5,80,188)"/>
+                <ellipse cx="84" cy="187" rx="2.5" ry="4" fill="#f5d0b0"/>
+                <ellipse cx="88" cy="188" rx="2.5" ry="4" fill="#f5d0b0" transform="rotate(5,88,188)"/>
+
+                <!-- 右臂 -->
+                <path d="M145,120 Q155,125 160,140 Q164,155 162,175 Q160,185 155,190 Q152,185 153,175 Q154,160 152,145 Q150,132 145,125Z" fill="url(#skinGrad)"/>
+                <!-- 右手 -->
+                <ellipse cx="157" cy="192" rx="8" ry="6" fill="url(#skinGrad)"/>
+                <!-- 右手指 -->
+                <ellipse cx="163" cy="190" rx="3" ry="4" fill="#f5d0b0" transform="rotate(15,163,190)"/>
+                <ellipse cx="160" cy="188" rx="2.5" ry="4" fill="#f5d0b0" transform="rotate(5,160,188)"/>
+                <ellipse cx="156" cy="187" rx="2.5" ry="4" fill="#f5d0b0"/>
+                <ellipse cx="152" cy="188" rx="2.5" ry="4" fill="#f5d0b0" transform="rotate(-5,152,188)"/>
+
+                <!-- ========== 腿 ========== -->
+                <!-- 左腿 -->
+                <path d="M100,195 Q98,220 97,260 Q96,300 98,340 Q100,360 105,370 Q108,372 110,370 Q112,360 110,340 Q108,300 107,260 Q106,220 108,195Z" fill="url(#skinGrad)"/>
+                <!-- 右腿 -->
+                <path d="M132,195 Q134,220 135,260 Q136,300 134,340 Q132,360 127,370 Q124,372 122,370 Q120,360 122,340 Q124,300 125,260 Q126,220 124,195Z" fill="url(#skinGrad)"/>
+                <!-- 腿部阴影 -->
+                <path d="M100,195 Q98,220 97,260 Q96,300 98,340 Q100,360 105,370" stroke="#e0c0a0" stroke-width="0.5" fill="none" opacity="0.3"/>
+                <path d="M132,195 Q134,220 135,260 Q136,300 134,340 Q132,360 127,370" stroke="#e0c0a0" stroke-width="0.5" fill="none" opacity="0.3"/>
+                <!-- 膝盖 -->
+                <ellipse cx="103" cy="290" rx="5" ry="3" fill="#e8c49a" opacity="0.2"/>
+                <ellipse cx="129" cy="290" rx="5" ry="3" fill="#e8c49a" opacity="0.2"/>
+
+                <!-- ========== 头部 ========== -->
+                <!-- 脸型 -->
+                <ellipse cx="120" cy="68" rx="38" ry="44" fill="url(#skinGrad)"/>
+                <!-- 脸部轮廓阴影 -->
+                <ellipse cx="120" cy="68" rx="38" ry="44" fill="none" stroke="#e0c0a0" stroke-width="0.5" opacity="0.3"/>
+
+                <!-- ========== 头发前层 ========== -->
+                <!-- 刘海 -->
+                <path d="M82,50 Q85,30 95,22 Q105,16 120,15 Q135,16 145,22 Q155,30 158,50 Q155,42 145,36 Q135,32 120,31 Q105,32 95,36 Q85,42 82,50Z" fill="url(#hairGrad)"/>
+                <!-- 刘海高光 -->
+                <path d="M95,28 Q105,22 120,21 Q135,22 145,28" stroke="url(#hairShine)" stroke-width="4" fill="none" opacity="0.6"/>
+                <!-- 右侧头发 -->
+                <path d="M158,50 Q162,60 163,75 Q162,85 158,90 Q160,80 160,65 Q160,55 158,50Z" fill="url(#hairGrad)"/>
+                <!-- 左侧头发 -->
+                <path d="M82,50 Q78,60 77,75 Q78,85 82,90 Q80,80 80,65 Q80,55 82,50Z" fill="url(#hairGrad)"/>
+
+                <!-- ========== 眼睛 ========== -->
+                <!-- 眼白 -->
+                <ellipse cx="105" cy="62" rx="10" ry="8" fill="white"/>
+                <ellipse cx="135" cy="62" rx="10" ry="8" fill="white"/>
+                <!-- 虹膜 -->
+                <circle cx="106" cy="63" r="6" fill="#4a90d9"/>
+                <circle cx="136" cy="63" r="6" fill="#4a90d9"/>
+                <!-- 瞳孔 -->
+                <circle cx="107" cy="63" r="3" fill="#1a1a2e"/>
+                <circle cx="137" cy="63" r="3" fill="#1a1a2e"/>
+                <!-- 眼睛高光 -->
+                <circle cx="109" cy="61" r="2" fill="white" opacity="0.9"/>
+                <circle cx="139" cy="61" r="2" fill="white" opacity="0.9"/>
+                <circle cx="105" cy="65" r="1" fill="white" opacity="0.5"/>
+                <circle cx="135" cy="65" r="1" fill="white" opacity="0.5"/>
+                <!-- 上眼线 -->
+                <path d="M95,58 Q100,54 105,54 Q110,54 115,58" stroke="#2c1810" stroke-width="1.5" fill="none"/>
+                <path d="M125,58 Q130,54 135,54 Q140,54 145,58" stroke="#2c1810" stroke-width="1.5" fill="none"/>
+                <!-- 睫毛 -->
+                <path d="M95,58 Q93,54 91,52" stroke="#2c1810" stroke-width="1" fill="none"/>
+                <path d="M98,56 Q96,52 95,50" stroke="#2c1810" stroke-width="0.8" fill="none"/>
+                <path d="M145,58 Q147,54 149,52" stroke="#2c1810" stroke-width="1" fill="none"/>
+                <path d="M142,56 Q144,52 145,50" stroke="#2c1810" stroke-width="0.8" fill="none"/>
+                <!-- 下眼线 -->
+                <path d="M97,68 Q105,72 113,68" stroke="#2c1810" stroke-width="0.8" fill="none" opacity="0.5"/>
+                <path d="M127,68 Q135,72 143,68" stroke="#2c1810" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+                <!-- ========== 眉毛 ========== -->
+                <path d="M96,50 Q105,46 114,48" stroke="#8b6914" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M126,48 Q135,46 144,50" stroke="#8b6914" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+                <!-- ========== 鼻子 ========== -->
+                <path d="M118,68 Q120,72 122,68" stroke="#e0b890" stroke-width="1" fill="none"/>
+
+                <!-- ========== 嘴巴 ========== -->
+                <!-- 上唇 -->
+                <path d="M110,80 Q115,77 120,79 Q125,77 130,80" fill="url(#lipGrad)"/>
+                <!-- 下唇 -->
+                <path d="M110,80 Q120,88 130,80" fill="url(#lipGrad)"/>
+                <!-- 唇线 -->
+                <path d="M110,80 Q120,82 130,80" stroke="#c2185b" stroke-width="0.5" fill="none"/>
+                <!-- 嘴唇高光 -->
+                <ellipse cx="120" cy="79" rx="4" ry="1.5" fill="white" opacity="0.3"/>
+
+                <!-- ========== 腮红 ========== -->
+                <ellipse cx="95" cy="75" rx="10" ry="6" fill="url(#blushGrad)"/>
+                <ellipse cx="145" cy="75" rx="10" ry="6" fill="url(#blushGrad)"/>
+            </svg>
+
+            <!-- 衣服覆盖层 -->
+            <svg class="clothing-layer" id="clothingLayer" viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg">
+                <!-- 默认粉色波点连衣裙 -->
+                <g id="defaultDress">
+                    <!-- 裙子主体 -->
+                    <path d="M90,118 Q88,128 86,145 Q83,170 85,195 L82,250 Q80,310 85,350 Q90,375 120,385 Q150,375 155,350 Q160,310 158,250 L155,195 Q157,170 154,145 Q152,128 150,118Z" fill="#ffb6c1" stroke="#ff69b4" stroke-width="1"/>
+                    <!-- 波点 -->
+                    <circle cx="100" cy="150" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="120" cy="145" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="140" cy="150" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="90" cy="170" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="110" cy="168" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="130" cy="165" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="150" cy="170" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="85" cy="195" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="105" cy="190" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="125" cy="188" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="145" cy="192" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="80" cy="220" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="100" cy="215" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="120" cy="212" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="140" cy="215" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="160" cy="218" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="78" cy="245" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="98" cy="240" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="118" cy="238" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="138" cy="240" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="158" cy="243" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="80" cy="270" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="100" cy="265" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="120" cy="262" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="140" cy="265" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="160" cy="268" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="82" cy="295" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="102" cy="290" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="122" cy="288" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="142" cy="290" r="3" fill="white" opacity="0.7"/>
+                    <circle cx="158" cy="293" r="3" fill="white" opacity="0.7"/>
+                    <!-- 腰带 -->
+                    <path d="M90,195 Q90,190 95,188 L145,188 Q150,190 150,195 Q150,200 145,202 L95,202 Q90,200 90,195Z" fill="#ff69b4"/>
+                    <!-- 蝴蝶结 -->
+                    <path d="M115,192 Q108,185 105,192 Q108,198 115,195Z" fill="#ff1493"/>
+                    <path d="M125,192 Q132,185 135,192 Q132,198 125,195Z" fill="#ff1493"/>
+                    <circle cx="120" cy="195" r="3" fill="#ff1493"/>
+                    <!-- 裙摆褶皱 -->
+                    <path d="M95,340 Q100,330 105,340" stroke="#ff69b4" stroke-width="0.5" fill="none" opacity="0.5"/>
+                    <path d="M115,345 Q120,335 125,345" stroke="#ff69b4" stroke-width="0.5" fill="none" opacity="0.5"/>
+                    <path d="M135,340 Q140,330 145,340" stroke="#ff69b4" stroke-width="0.5" fill="none" opacity="0.5"/>
+                    <!-- 短袖 -->
+                    <path d="M88,118 Q82,125 80,135 Q82,140 88,138 Q92,132 95,125Z" fill="#ffb6c1" stroke="#ff69b4" stroke-width="0.8"/>
+                    <path d="M152,118 Q158,125 160,135 Q158,140 152,138 Q148,132 145,125Z" fill="#ffb6c1" stroke="#ff69b4" stroke-width="0.8"/>
+                </g>
+            </svg>
+
+            <!-- 鞋子层 -->
+            <svg class="shoes-layer" id="shoesLayer" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+                <!-- 默认粉色高跟鞋 -->
+                <g id="defaultShoes">
+                    <path d="M88,10 Q95,5 105,8 Q112,12 110,20 L108,28 Q105,32 95,32 L85,28 Q80,22 82,15Z" fill="#ff69b4" stroke="#ff1493" stroke-width="1"/>
+                    <path d="M130,10 Q137,5 147,8 Q154,12 152,20 L150,28 Q147,32 137,32 L127,28 Q122,22 124,15Z" fill="#ff69b4" stroke="#ff1493" stroke-width="1"/>
+                    <!-- 鞋跟 -->
+                    <rect x="92" y="28" width="4" height="10" rx="1" fill="#ff1493"/>
+                    <rect x="134" y="28" width="4" height="10" rx="1" fill="#ff1493"/>
+                    <!-- 鞋面装饰 -->
+                    <ellipse cx="100" cy="14" rx="4" ry="2" fill="white" opacity="0.4"/>
+                    <ellipse cx="142" cy="14" rx="4" ry="2" fill="white" opacity="0.4"/>
+                </g>
+            </svg>
+
+            <!-- 配饰层 -->
+            <div class="accessory-layer" id="accessoryLayer"></div>
         </div>
 
         <!-- 分类标签 -->
@@ -354,11 +446,9 @@
                 <button class="tab-btn" data-category="accessories">💎 配饰</button>
             </div>
 
-            <!-- 衣服选项 -->
             <div class="items-grid" id="itemsGrid"></div>
         </div>
 
-        <!-- 操作按钮 -->
         <div class="actions">
             <button class="action-btn random" onclick="randomOutfit()">🎲 随机搭配</button>
             <button class="action-btn reset" onclick="resetOutfit()">🔄 重新开始</button>
@@ -370,272 +460,236 @@
     </div>
 
     <script>
-        // 衣服数据
         const clothingData = {
             dresses: [
-                { id: 'd1', icon: '👗', name: '粉色公主裙', color: '#ff69b4', style: 'princess' },
-                { id: 'd2', icon: '👗', name: '蓝色星空裙', color: '#4169e1', style: 'starry' },
-                { id: 'd3', icon: '👗', name: '紫色魔法裙', color: '#9b59b6', style: 'magic' },
-                { id: 'd4', icon: '👗', name: '红色舞会裙', color: '#e74c3c', style: 'ball' },
-                { id: 'd5', icon: '👗', name: '绿色精灵裙', color: '#2ecc71', style: 'elf' },
-                { id: 'd6', icon: '👗', name: '彩虹渐变裙', color: 'linear-gradient(135deg,#ff6b6b,#feca57,#48dbfb,#ff9ff3)', style: 'rainbow' },
-                { id: 'd7', icon: '👗', name: '白色婚纱', color: '#fff', style: 'wedding' },
-                { id: 'd8', icon: '👗', name: '黄色向日葵裙', color: '#f1c40f', style: 'sunflower' },
+                { id:'d1',icon:'👗',name:'粉色波点裙',fill:'#ffb6c1',stroke:'#ff69b4',dots:true,bow:true,sleeves:true,style:'classic'},
+                { id:'d2',icon:'👗',name:'蓝色星空裙',fill:'#1a237e',stroke:'#3f51b5',dots:false,bow:false,sleeves:false,style:'starry'},
+                { id:'d3',icon:'👗',name:'紫色魔法裙',fill:'#7b1fa2',stroke:'#9c27b0',dots:false,bow:true,sleeves:true,style:'magic'},
+                { id:'d4',icon:'👗',name:'红色舞会裙',fill:'#c62828',stroke:'#e53935',dots:false,bow:false,sleeves:false,style:'ball'},
+                { id:'d5',icon:'👗',name:'绿色精灵裙',fill:'#2e7d32',stroke:'#43a047',dots:false,bow:true,sleeves:false,style:'elf'},
+                { id:'d6',icon:'👗',name:'金色晚礼服',fill:'#f9a825',stroke:'#fbc02d',dots:false,bow:true,sleeves:false,style:'gold'},
+                { id:'d7',icon:'👗',name:'白色婚纱',fill:'#fafafa',stroke:'#e0e0e0',dots:false,bow:true,sleeves:true,style:'wedding'},
+                { id:'d8',icon:'👗',name:'彩虹渐变裙',fill:'rainbow',stroke:'#e91e8c',dots:false,bow:true,sleeves:false,style:'rainbow'},
             ],
             tops: [
-                { id: 't1', icon: '👚', name: '粉色T恤', color: '#ff69b4', style: 'tshirt' },
-                { id: 't2', icon: '👚', name: '白色衬衫', color: '#fff', style: 'shirt' },
-                { id: 't3', icon: '👚', name: '条纹水手服', color: '#3498db', style: 'sailor' },
-                { id: 't4', icon: '👚', name: '紫色毛衣', color: '#9b59b6', style: 'sweater' },
-                { id: 't5', icon: '👚', name: '牛仔外套', color: '#5dade2', style: 'denim' },
-                { id: 't6', icon: '👚', name: '红色卫衣', color: '#e74c3c', style: 'hoodie' },
-                { id: 't7', icon: '👚', name: '星星图案背心', color: '#2c3e50', style: 'vest' },
-                { id: 't8', icon: '👚', name: '蝴蝶结上衣', color: '#e91e8c', style: 'bow' },
+                { id:'t1',icon:'👚',name:'粉色T恤',fill:'#f48fb1',stroke:'#ec407a',style:'tshirt'},
+                { id:'t2',icon:'👚',name:'白色衬衫',fill:'#fafafa',stroke:'#bdbdbd',style:'shirt'},
+                { id:'t3',icon:'👚',name:'水手服',fill:'#42a5f5',stroke:'#1e88e5',style:'sailor'},
+                { id:'t4',icon:'👚',name:'紫色毛衣',fill:'#ab47bc',stroke:'#8e24aa',style:'sweater'},
+                { id:'t5',icon:'👚',name:'牛仔外套',fill:'#5c6bc0',stroke:'#3f51b5',style:'denim'},
+                { id:'t6',icon:'👚',name:'红色卫衣',fill:'#ef5350',stroke:'#e53935',style:'hoodie'},
+                { id:'t7',icon:'👚',name:'星星背心',fill:'#263238',stroke:'#37474f',style:'vest'},
+                { id:'t8',icon:'👚',name:'蝴蝶结上衣',fill:'#f06292',stroke:'#e91e63',style:'bow'},
             ],
             bottoms: [
-                { id: 'b1', icon: '👖', name: '蓝色牛仔裤', color: '#3498db', style: 'jeans' },
-                { id: 'b2', icon: '👖', name: '粉色短裙', color: '#ff69b4', style: 'skirt' },
-                { id: 'b3', icon: '👖', name: '黑色长裤', color: '#2c3e50', style: 'pants' },
-                { id: 'b4', icon: '👖', name: '格子短裙', color: '#e74c3c', style: 'plaid' },
-                { id: 'b5', icon: '👖', name: '白色蓬蓬裙', color: '#ecf0f1', style: 'tutu' },
-                { id: 'b6', icon: '👖', name: '牛仔短裤', color: '#5dade2', style: 'shorts' },
-                { id: 'b7', icon: '👖', name: '紫色百褶裙', color: '#8e44ad', style: 'pleated' },
-                { id: 'b8', icon: '👖', name: '花花长裙', color: '#f39c12', style: 'floral' },
+                { id:'b1',icon:'👖',name:'蓝色牛仔裤',fill:'#42a5f5',stroke:'#1e88e5',style:'jeans'},
+                { id:'b2',icon:'👖',name:'粉色短裙',fill:'#f48fb1',stroke:'#ec407a',style:'skirt'},
+                { id:'b3',icon:'👖',name:'黑色长裤',fill:'#37474f',stroke:'#263238',style:'pants'},
+                { id:'b4',icon:'👖',name:'格子短裙',fill:'#c62828',stroke:'#b71c1c',style:'plaid'},
+                { id:'b5',icon:'👖',name:'白色蓬蓬裙',fill:'#fafafa',stroke:'#e0e0e0',style:'tutu'},
+                { id:'b6',icon:'👖',name:'牛仔短裤',fill:'#5c6bc0',stroke:'#3f51b5',style:'shorts'},
+                { id:'b7',icon:'👖',name:'紫色百褶裙',fill:'#7e57c2',stroke:'#5e35b1',style:'pleated'},
+                { id:'b8',icon:'👖',name:'花花长裙',fill:'#ffa726',stroke:'#f57c00',style:'floral'},
             ],
             shoes: [
-                { id: 's1', icon: '👠', name: '红色高跟鞋', color: '#e74c3c', style: 'heels' },
-                { id: 's2', icon: '👟', name: '白色运动鞋', color: '#fff', style: 'sneakers' },
-                { id: 's3', icon: '👢', name: '棕色长靴', color: '#8b4513', style: 'boots' },
-                { id: 's4', icon: '👡', name: '粉色凉鞋', color: '#ff69b4', style: 'sandals' },
-                { id: 's5', icon: '🥿', name: '芭蕾舞鞋', color: '#f1c40f', style: 'ballet' },
-                { id: 's6', icon: '👠', name: '水晶鞋', color: '#87ceeb', style: 'crystal' },
-                { id: 's7', icon: '👢', name: '黑色短靴', color: '#2c3e50', style: 'ankle' },
-                { id: 's8', icon: '👟', name: '彩虹鞋', color: '#e91e8c', style: 'rainbow' },
+                { id:'s1',icon:'👠',name:'红色高跟鞋',fill:'#e53935',stroke:'#c62828',style:'heels'},
+                { id:'s2',icon:'👟',name:'白色运动鞋',fill:'#fafafa',stroke:'#bdbdbd',style:'sneakers'},
+                { id:'s3',icon:'👢',name:'棕色长靴',fill:'#8d6e63',stroke:'#5d4037',style:'boots'},
+                { id:'s4',icon:'👡',name:'粉色凉鞋',fill:'#f48fb1',stroke:'#ec407a',style:'sandals'},
+                { id:'s5',icon:'🥿',name:'芭蕾舞鞋',fill:'#fff176',stroke:'#fdd835',style:'ballet'},
+                { id:'s6',icon:'👠',name:'水晶鞋',fill:'#81d4fa',stroke='#29b6f6',style:'crystal'},
+                { id:'s7',icon:'👢',name:'黑色短靴',fill:'#424242',stroke:'#212121',style:'ankle'},
+                { id:'s8',icon:'👟',name:'粉色蝴蝶鞋',fill:'#f06292',stroke:'#e91e63',style:'butterfly'},
             ],
             accessories: [
-                { id: 'a1', icon: '👑', name: '皇冠', type: 'crown' },
-                { id: 'a2', icon: '🎀', name: '蝴蝶结', type: 'bow' },
-                { id: 'a3', icon: '💎', name: '项链', type: 'necklace' },
-                { id: 'a4', icon: '🕶️', name: '墨镜', type: 'glasses' },
-                { id: 'a5', icon: '🌸', name: '花环', type: 'flowers' },
-                { id: 'a6', icon: '💍', name: '戒指', type: 'ring' },
-                { id: 'a7', icon: '👜', name: '手提包', type: 'bag' },
-                { id: 'a8', icon: '🦋', name: '蝴蝶发夹', type: 'butterfly' },
+                { id:'a1',icon:'👑',name:'皇冠',type:'crown'},
+                { id:'a2',icon:'🎀',name:'蝴蝶结发带',type:'bow'},
+                { id:'a3',icon:'💎',name:'钻石项链',type:'necklace'},
+                { id:'a4',icon:'🕶️',name:'时尚墨镜',type:'glasses'},
+                { id:'a5',icon:'🌸',name:'花环',type:'flowers'},
+                { id:'a6',icon:'💍',name:'钻戒',type:'ring'},
+                { id:'a7',icon:'👜',name:'手提包',type:'bag'},
+                { id:'a8',icon:'🦋',name:'蝴蝶发夹',type:'butterfly'},
             ]
         };
 
-        // 当前选中的衣服
-        let currentOutfit = {
-            dress: null,
-            top: null,
-            bottom: null,
-            shoes: null,
-            accessory: null
-        };
-
+        let currentOutfit = { dress:null, top:null, bottom:null, shoes:null, accessory:null };
         let currentCategory = 'dresses';
 
-        // 渲染衣服选项
         function renderItems(category) {
             const grid = document.getElementById('itemsGrid');
             const items = clothingData[category];
             grid.innerHTML = items.map(item => `
-                <div class="item-card" data-id="${item.id}" onclick="selectItem('${category}', '${item.id}')">
+                <div class="item-card" data-id="${item.id}" onclick="selectItem('${category}','${item.id}')">
                     <span class="icon">${item.icon}</span>
                     <span class="name">${item.name}</span>
                 </div>
             `).join('');
         }
 
-        // 选择衣服
         function selectItem(category, itemId) {
             const items = clothingData[category];
             const item = items.find(i => i.id === itemId);
             if (!item) return;
-
-            // 更新选中状态
             document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected'));
             document.querySelector(`[data-id="${itemId}"]`)?.classList.add('selected');
 
-            // 更新芭比的衣服
-            if (category === 'dresses') {
-                currentOutfit.dress = item;
-                currentOutfit.top = null;  // 穿裙子时清除上衣
-                currentOutfit.bottom = null; // 穿裙子时清除下装
-            } else if (category === 'tops') {
-                currentOutfit.top = item;
-                currentOutfit.dress = null; // 穿上衣时清除裙子
-            } else if (category === 'bottoms') {
-                currentOutfit.bottom = item;
-                currentOutfit.dress = null; // 穿下装时清除裙子
-            } else if (category === 'shoes') {
-                currentOutfit.shoes = item;
-            } else if (category === 'accessories') {
-                currentOutfit.accessory = item;
-            }
+            if (category === 'dresses') { currentOutfit.dress = item; currentOutfit.top = null; currentOutfit.bottom = null; }
+            else if (category === 'tops') { currentOutfit.top = item; currentOutfit.dress = null; }
+            else if (category === 'bottoms') { currentOutfit.bottom = item; currentOutfit.dress = null; }
+            else if (category === 'shoes') { currentOutfit.shoes = item; }
+            else if (category === 'accessories') { currentOutfit.accessory = item; }
 
             updateDollAppearance();
         }
 
-        // 更新芭比外观
         function updateDollAppearance() {
             const clothingLayer = document.getElementById('clothingLayer');
             const shoesLayer = document.getElementById('shoesLayer');
-            const hair = document.getElementById('hair');
-            const hairLong = document.getElementById('hairLong');
+            const accessoryLayer = document.getElementById('accessoryLayer');
 
-            let clothingHTML = '';
-            let shoesHTML = '';
+            let cHTML = '';
+            let sHTML = '';
 
             // 绘制连衣裙
             if (currentOutfit.dress) {
                 const d = currentOutfit.dress;
-                clothingHTML += `<svg width="120" height="200" style="position:absolute;top:0;left:50%;transform:translateX(-50%);">`;
-                if (d.style === 'princess') {
-                    clothingHTML += `<path d="M35,5 L85,5 Q90,5 90,10 L90,40 L95,45 L100,120 Q100,130 90,135 L30,135 Q20,130 20,120 L25,45 L30,40 L30,10 Q30,5 35,5Z" fill="${d.color}" stroke="#ff1493" stroke-width="1.5"/>`;
-                    clothingHTML += `<path d="M40,10 L80,10" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>`;
-                    clothingHTML += `<ellipse cx="60" cy="25" rx="8" ry="5" fill="rgba(255,255,255,0.3)"/>`;
-                } else if (d.style === 'starry') {
-                    clothingHTML += `<path d="M35,5 L85,5 Q90,5 90,10 L90,40 L95,50 L100,130 Q95,140 60,145 Q25,140 20,130 L25,50 L30,40 L30,10 Q30,5 35,5Z" fill="${d.color}" stroke="#1a237e" stroke-width="1.5"/>`;
-                    for (let i = 0; i < 8; i++) {
-                        const sx = 30 + Math.random() * 60;
-                        const sy = 15 + Math.random() * 120;
-                        clothingHTML += `<circle cx="${sx}" cy="${sy}" r="${1+Math.random()*2}" fill="white" opacity="0.8"/>`;
-                    }
+                cHTML += `<g>`;
+                if (d.style === 'starry') {
+                    cHTML += `<path d="M90,118 Q88,128 86,145 Q83,170 85,195 L82,250 Q80,310 85,350 Q90,375 120,385 Q150,375 155,350 Q160,310 158,250 L155,195 Q157,170 154,145 Q152,128 150,118Z" fill="${d.fill}" stroke="${d.stroke}" stroke-width="1"/>`;
+                    for(let i=0;i<20;i++){cHTML+=`<circle cx="${85+Math.random()*70}" cy="${130+Math.random()*240}" r="${1+Math.random()*2}" fill="white" opacity="${0.5+Math.random()*0.5}"/>`;}
+                    cHTML += `<path d="M95,150 Q120,140 145,150 Q140,170 120,175 Q100,170 95,150Z" fill="rgba(255,255,255,0.1)"/>`;
                 } else if (d.style === 'rainbow') {
-                    clothingHTML += `<defs><linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b6b"/><stop offset="25%" style="stop-color:#feca57"/><stop offset="50%" style="stop-color:#48dbfb"/><stop offset="75%" style="stop-color:#ff9ff3"/><stop offset="100%" style="stop-color:#ff6b6b"/></linearGradient></defs>`;
-                    clothingHTML += `<path d="M35,5 L85,5 Q90,5 90,10 L90,40 L95,50 L100,130 Q95,140 60,145 Q25,140 20,130 L25,50 L30,40 L30,10 Q30,5 35,5Z" fill="url(#rainbow)" stroke="#e91e8c" stroke-width="1.5"/>`;
+                    cHTML += `<defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff6b6b"/><stop offset="20%" style="stop-color:#ffa502"/><stop offset="40%" style="stop-color:#feca57"/><stop offset="60%" style="stop-color:#48dbfb"/><stop offset="80%" style="stop-color:#ff9ff3"/><stop offset="100%" style="stop-color:#ff6b6b"/></linearGradient></defs>`;
+                    cHTML += `<path d="M90,118 Q88,128 86,145 Q83,170 85,195 L82,250 Q80,310 85,350 Q90,375 120,385 Q150,375 155,350 Q160,310 158,250 L155,195 Q157,170 154,145 Q152,128 150,118Z" fill="url(#rg)" stroke="${d.stroke}" stroke-width="1"/>`;
                 } else if (d.style === 'wedding') {
-                    clothingHTML += `<path d="M35,5 L85,5 Q90,5 90,10 L90,35 L100,50 L110,145 Q90,155 60,160 Q30,155 10,145 L20,50 L30,35 L30,10 Q30,5 35,5Z" fill="white" stroke="#ddd" stroke-width="1.5"/>`;
-                    clothingHTML += `<path d="M40,10 L80,10" stroke="#eee" stroke-width="1"/>`;
-                    clothingHTML += `<circle cx="60" cy="20" r="3" fill="#ddd"/>`;
+                    cHTML += `<path d="M90,118 Q88,128 86,145 Q83,170 85,195 L78,260 Q72,320 80,360 Q90,385 120,395 Q150,385 160,360 Q168,320 162,260 L155,195 Q157,170 154,145 Q152,128 150,118Z" fill="${d.fill}" stroke="${d.stroke}" stroke-width="1"/>`;
+                    cHTML += `<path d="M95,150 Q120,145 145,150" stroke="#e0e0e0" stroke-width="0.5" fill="none"/>`;
+                    cHTML += `<path d="M100,180 Q120,175 140,180" stroke="#e0e0e0" stroke-width="0.5" fill="none"/>`;
                 } else {
-                    clothingHTML += `<path d="M35,5 L85,5 Q90,5 90,10 L90,40 L95,50 L100,130 Q95,140 60,145 Q25,140 20,130 L25,50 L30,40 L30,10 Q30,5 35,5Z" fill="${d.color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>`;
-                    clothingHTML += `<path d="M45,15 L75,15 Q80,15 80,20 L80,35 L75,40 L45,40 L40,35 L40,20 Q40,15 45,15Z" fill="rgba(255,255,255,0.3)"/>`;
+                    cHTML += `<path d="M90,118 Q88,128 86,145 Q83,170 85,195 L82,250 Q80,310 85,350 Q90,375 120,385 Q150,375 155,350 Q160,310 158,250 L155,195 Q157,170 154,145 Q152,128 150,118Z" fill="${d.fill}" stroke="${d.stroke}" stroke-width="1"/>`;
                 }
-                clothingHTML += `</svg>`;
+                if (d.dots) {
+                    for(let y=150;y<350;y+=25){for(let x=85;x<158;x+=18){cHTML+=`<circle cx="${x+Math.random()*6}" cy="${y+Math.random()*6}" r="3" fill="white" opacity="0.7"/>`;}}
+                }
+                // 腰带
+                cHTML += `<path d="M90,195 Q90,190 95,188 L145,188 Q150,190 150,195 Q150,200 145,202 L95,202 Q90,200 90,195Z" fill="${d.stroke}"/>`;
+                if (d.bow) {
+                    cHTML += `<path d="M115,192 Q108,185 105,192 Q108,198 115,195Z" fill="${d.fill}"/>`;
+                    cHTML += `<path d="M125,192 Q132,185 135,192 Q132,198 125,195Z" fill="${d.fill}"/>`;
+                    cHTML += `<circle cx="120" cy="195" r="3" fill="${d.stroke}"/>`;
+                }
+                if (d.sleeves) {
+                    cHTML += `<path d="M88,118 Q82,125 80,135 Q82,140 88,138 Q92,132 95,125Z" fill="${d.fill}" stroke="${d.stroke}" stroke-width="0.8"/>`;
+                    cHTML += `<path d="M152,118 Q158,125 160,135 Q158,140 152,138 Q148,132 145,125Z" fill="${d.fill}" stroke="${d.stroke}" stroke-width="0.8"/>`;
+                }
+                cHTML += `</g>`;
             }
 
-            // 绘制上衣
+            // 上衣
             if (currentOutfit.top) {
                 const t = currentOutfit.top;
-                clothingHTML += `<svg width="100" height="70" style="position:absolute;top:0;left:50%;transform:translateX(-50%);">`;
+                cHTML += `<g>`;
                 if (t.style === 'sailor') {
-                    clothingHTML += `<path d="M20,5 L80,5 Q85,5 85,10 L85,35 L90,40 L95,55 L80,60 L20,60 L5,55 L10,40 L15,35 L15,10 Q15,5 20,5Z" fill="white" stroke="#3498db" stroke-width="2"/>`;
-                    clothingHTML += `<path d="M20,5 L80,5 L85,10 L80,15 L20,15 L15,10Z" fill="#3498db"/>`;
-                    clothingHTML += `<line x1="48" y1="15" x2="48" y2="35" stroke="#3498db" stroke-width="2"/>`;
-                    clothingHTML += `<line x1="52" y1="15" x2="52" y2="35" stroke="#3498db" stroke-width="2"/>`;
+                    cHTML += `<path d="M88,118 Q85,125 83,140 Q80,160 85,180 L95,195 L145,195 L155,180 Q160,160 157,140 Q155,125 152,118Z" fill="white" stroke="${t.stroke}" stroke-width="1.5"/>`;
+                    cHTML += `<path d="M88,118 L152,118 L155,125 L150,128 L90,128 L85,125Z" fill="${t.fill}"/>`;
+                    cHTML += `<line x1="118" y1="128" x2="118" y2="170" stroke="${t.stroke}" stroke-width="1.5"/>`;
+                    cHTML += `<line x1="122" y1="128" x2="122" y2="170" stroke="${t.stroke}" stroke-width="1.5"/>`;
                 } else if (t.style === 'denim') {
-                    clothingHTML += `<path d="M20,5 L80,5 Q85,5 85,10 L85,35 L90,40 L95,55 L80,60 L20,60 L5,55 L10,40 L15,35 L15,10 Q15,5 20,5Z" fill="${t.color}" stroke="#2980b9" stroke-width="1.5"/>`;
-                    clothingHTML += `<rect x="35" y="20" width="8" height="6" rx="1" fill="#2980b9"/>`;
-                    clothingHTML += `<rect x="55" y="20" width="8" height="6" rx="1" fill="#2980b9"/>`;
+                    cHTML += `<path d="M88,118 Q85,125 83,140 Q80,160 85,180 L95,195 L145,195 L155,180 Q160,160 157,140 Q155,125 152,118Z" fill="${t.fill}" stroke="${t.stroke}" stroke-width="1"/>`;
+                    cHTML += `<rect x="108" y="155" width="10" height="8" rx="1" fill="${t.stroke}"/>`;
+                    cHTML += `<rect x="122" y="155" width="10" height="8" rx="1" fill="${t.stroke}"/>`;
+                    cHTML += `<path d="M88,118 L90,115 L95,118 L92,125Z" fill="${t.fill}" stroke="${t.stroke}" stroke-width="0.5"/>`;
+                    cHTML += `<path d="M152,118 L150,115 L145,118 L148,125Z" fill="${t.fill}" stroke="${t.stroke}" stroke-width="0.5"/>`;
                 } else {
-                    clothingHTML += `<path d="M20,5 L80,5 Q85,5 85,10 L85,35 L90,40 L95,55 L80,60 L20,60 L5,55 L10,40 L15,35 L15,10 Q15,5 20,5Z" fill="${t.color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>`;
+                    cHTML += `<path d="M88,118 Q85,125 83,140 Q80,160 85,180 L95,195 L145,195 L155,180 Q160,160 157,140 Q155,125 152,118Z" fill="${t.fill}" stroke="${t.stroke}" stroke-width="1"/>`;
                 }
-                clothingHTML += `</svg>`;
+                cHTML += `</g>`;
             }
 
-            // 绘制下装
+            // 下装
             if (currentOutfit.bottom) {
                 const b = currentOutfit.bottom;
-                clothingHTML += `<svg width="90" height="80" style="position:absolute;top:55px;left:50%;transform:translateX(-50%);">`;
-                if (b.style === 'skirt' || b.style === 'plaid' || b.style === 'tutu' || b.style === 'pleated' || b.style === 'floral') {
-                    const skirtWidth = b.style === 'tutu' ? 95 : 85;
-                    clothingHTML += `<path d="M15,0 L75,0 L${skirtWidth},70 Q50,75 ${100-skirtWidth},70 L15,0Z" fill="${b.color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>`;
-                    if (b.style === 'plaid') {
-                        for (let i = 0; i < 5; i++) {
-                            clothingHTML += `<line x1="${20+i*12}" y1="5" x2="${25+i*14}" y2="65" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>`;
-                        }
-                    }
-                    if (b.style === 'pleated') {
-                        for (let i = 0; i < 7; i++) {
-                            clothingHTML += `<line x1="${18+i*10}" y1="5" x2="${20+i*11}" y2="65" stroke="rgba(0,0,0,0.1)" stroke-width="1"/>`;
-                        }
-                    }
+                cHTML += `<g>`;
+                if (b.style === 'skirt' || b.style === 'tutu' || b.style === 'pleated' || b.style === 'floral' || b.style === 'plaid') {
+                    const w = b.style === 'tutu' ? 95 : 85;
+                    cHTML += `<path d="M92,192 L148,192 L${155+w-85},350 Q120,365 ${85-w+85},350Z" fill="${b.fill}" stroke="${b.stroke}" stroke-width="1"/>`;
+                    if (b.style === 'plaid') { for(let i=0;i<6;i++){cHTML+=`<line x1="${98+i*10}" y1="200" x2="${100+i*12}" y2="345" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>`;}}
+                    if (b.style === 'pleated') { for(let i=0;i<8;i++){cHTML+=`<line x1="${95+i*8}" y1="195" x2="${96+i*9}" y2="345" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>`;}}
                 } else {
-                    clothingHTML += `<rect x="15" y="0" width="25" height="75" rx="5" fill="${b.color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>`;
-                    clothingHTML += `<rect x="50" y="0" width="25" height="75" rx="5" fill="${b.color}" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>`;
+                    cHTML += `<path d="M95,192 L115,192 L112,370 L105,372 L92,370Z" fill="${b.fill}" stroke="${b.stroke}" stroke-width="1"/>`;
+                    cHTML += `<path d="M125,192 L145,192 L148,370 L141,372 L128,370Z" fill="${b.fill}" stroke="${b.stroke}" stroke-width="1"/>`;
                 }
-                clothingHTML += `</svg>`;
+                cHTML += `</g>`;
             }
 
-            // 绘制鞋子
+            // 鞋子
             if (currentOutfit.shoes) {
                 const s = currentOutfit.shoes;
-                shoesHTML += `<svg width="120" height="35" style="position:absolute;left:50%;transform:translateX(-50%);top:0;">`;
+                sHTML += `<g>`;
                 if (s.style === 'heels') {
-                    shoesHTML += `<path d="M10,20 L30,20 L35,5 L40,20 L45,25 L35,30 L5,30Z" fill="${s.color}" stroke="rgba(0,0,0,0.3)" stroke-width="1"/>`;
-                    shoesHTML += `<path d="M70,20 L90,20 L95,5 L100,20 L105,25 L95,30 L65,30Z" fill="${s.color}" stroke="rgba(0,0,0,0.3)" stroke-width="1"/>`;
+                    sHTML += `<path d="M88,8 Q95,3 105,6 Q112,10 110,18 L108,26 Q105,30 95,30 L85,26 Q80,20 82,13Z" fill="${s.fill}" stroke="${s.stroke}" stroke-width="1"/>`;
+                    sHTML += `<path d="M130,8 Q137,3 147,6 Q154,10 152,18 L150,26 Q147,30 137,30 L127,26 Q122,20 124,13Z" fill="${s.fill}" stroke="${s.stroke}" stroke-width="1"/>`;
+                    sHTML += `<rect x="92" y="26" width="4" height="12" rx="1" fill="${s.stroke}"/>`;
+                    sHTML += `<rect x="134" y="26" width="4" height="12" rx="1" fill="${s.stroke}"/>`;
+                    sHTML += `<ellipse cx="100" cy="12" rx="4" ry="2" fill="white" opacity="0.4"/>`;
+                    sHTML += `<ellipse cx="142" cy="12" rx="4" ry="2" fill="white" opacity="0.4"/>`;
                 } else if (s.style === 'boots') {
-                    shoesHTML += `<path d="M10,0 L35,0 L35,20 L40,25 L30,30 L0,30 L0,10Z" fill="${s.color}" stroke="rgba(0,0,0,0.3)" stroke-width="1"/>`;
-                    shoesHTML += `<path d="M80,0 L105,0 L105,10 L115,30 L85,30 L75,25 L75,20Z" fill="${s.color}" stroke="rgba(0,0,0,0.3)" stroke-width="1"/>`;
+                    sHTML += `<path d="M85,0 L112,0 L112,26 Q115,30 108,34 L82,34 Q76,30 78,26 L78,8Z" fill="${s.fill}" stroke="${s.stroke}" stroke-width="1"/>`;
+                    sHTML += `<path d="M128,0 L155,0 L155,8 L162,34 L125,34 Q118,30 120,26 L120,0Z" fill="${s.fill}" stroke="${s.stroke}" stroke-width="1"/>`;
+                    sHTML += `<path d="M78,15 L112,15" stroke="${s.stroke}" stroke-width="0.8"/>`;
+                    sHTML += `<path d="M120,15 L155,15" stroke="${s.stroke}" stroke-width="0.8"/>`;
                 } else {
-                    shoesHTML += `<ellipse cx="30" cy="20" rx="20" ry="12" fill="${s.color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5"/>`;
-                    shoesHTML += `<ellipse cx="90" cy="20" rx="20" ry="12" fill="${s.color}" stroke="rgba(0,0,0,0.3)" stroke-width="1.5"/>`;
+                    sHTML += `<ellipse cx="98" cy="18" rx="20" ry="12" fill="${s.fill}" stroke="${s.stroke}" stroke-width="1.5"/>`;
+                    sHTML += `<ellipse cx="142" cy="18" rx="20" ry="12" fill="${s.fill}" stroke="${s.stroke}" stroke-width="1.5"/>`;
                 }
-                shoesHTML += `</svg>`;
+                sHTML += `</g>`;
             }
 
-            // 绘制配饰
+            clothingLayer.innerHTML = cHTML;
+            shoesLayer.innerHTML = sHTML;
+
+            // 配饰
+            let accHTML = '';
             if (currentOutfit.accessory) {
                 const a = currentOutfit.accessory;
-                if (a.type === 'crown') {
-                    clothingHTML += `<div style="position:absolute;top:-5px;left:50%;transform:translateX(-50%);font-size:2.5rem;z-index:20;">👑</div>`;
-                } else if (a.type === 'bow') {
-                    clothingHTML += `<div style="position:absolute;top:15px;right:45px;font-size:2rem;z-index:20;">🎀</div>`;
-                } else if (a.type === 'necklace') {
-                    clothingHTML += `<div style="position:absolute;top:85px;left:50%;transform:translateX(-50%);font-size:1.5rem;z-index:20;">💎</div>`;
-                } else if (a.type === 'glasses') {
-                    clothingHTML += `<div style="position:absolute;top:38px;left:50%;transform:translateX(-50%);font-size:1.8rem;z-index:20;">🕶️</div>`;
-                } else if (a.type === 'flowers') {
-                    clothingHTML += `<div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);font-size:2.2rem;z-index:20;">🌸</div>`;
-                } else if (a.type === 'ring') {
-                    clothingHTML += `<div style="position:absolute;top:140px;left:42px;font-size:1.2rem;z-index:20;">💍</div>`;
-                } else if (a.type === 'bag') {
-                    clothingHTML += `<div style="position:absolute;top:120px;right:25px;font-size:1.8rem;z-index:20;">👜</div>`;
-                } else if (a.type === 'butterfly') {
-                    clothingHTML += `<div style="position:absolute;top:10px;left:55px;font-size:1.5rem;z-index:20;">🦋</div>`;
-                }
+                if (a.type === 'crown') accHTML = `<div style="position:absolute;top:2px;left:50%;transform:translateX(-50%);font-size:2.8rem;z-index:20;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2));">👑</div>`;
+                else if (a.type === 'bow') accHTML = `<div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:2.5rem;z-index:20;">🎀</div>`;
+                else if (a.type === 'necklace') accHTML = `<div style="position:absolute;top:95px;left:50%;transform:translateX(-50%);font-size:1.8rem;z-index:20;">💎</div>`;
+                else if (a.type === 'glasses') accHTML = `<div style="position:absolute;top:48px;left:50%;transform:translateX(-50%);font-size:2rem;z-index:20;">🕶️</div>`;
+                else if (a.type === 'flowers') accHTML = `<div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);font-size:2.5rem;z-index:20;">🌸</div>`;
+                else if (a.type === 'ring') accHTML = `<div style="position:absolute;top:160px;left:55px;font-size:1.3rem;z-index:20;">💍</div>`;
+                else if (a.type === 'bag') accHTML = `<div style="position:absolute;top:140px;right:18px;font-size:2rem;z-index:20;">👜</div>`;
+                else if (a.type === 'butterfly') accHTML = `<div style="position:absolute;top:12px;left:58px;font-size:1.8rem;z-index:20;">🦋</div>`;
             }
-
-            clothingLayer.innerHTML = clothingHTML;
-            shoesLayer.innerHTML = shoesHTML;
+            accessoryLayer.innerHTML = accHTML;
         }
 
-        // 随机搭配
         function randomOutfit() {
-            const randItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-            // 随机决定穿裙子还是上衣+下装
+            const rand = arr => arr[Math.floor(Math.random() * arr.length)];
             if (Math.random() > 0.5) {
-                currentOutfit.dress = randItem(clothingData.dresses);
-                currentOutfit.top = null;
-                currentOutfit.bottom = null;
+                currentOutfit.dress = rand(clothingData.dresses);
+                currentOutfit.top = null; currentOutfit.bottom = null;
             } else {
                 currentOutfit.dress = null;
-                currentOutfit.top = randItem(clothingData.tops);
-                currentOutfit.bottom = randItem(clothingData.bottoms);
+                currentOutfit.top = rand(clothingData.tops);
+                currentOutfit.bottom = rand(clothingData.bottoms);
             }
-            currentOutfit.shoes = randItem(clothingData.shoes);
-            currentOutfit.accessory = Math.random() > 0.3 ? randItem(clothingData.accessories) : null;
-
+            currentOutfit.shoes = rand(clothingData.shoes);
+            currentOutfit.accessory = Math.random() > 0.3 ? rand(clothingData.accessories) : null;
             updateDollAppearance();
-
-            // 动画效果
-            const container = document.getElementById('dollContainer');
-            container.style.transform = 'scale(1.05)';
-            setTimeout(() => container.style.transform = 'scale(1)', 200);
+            const c = document.getElementById('dollContainer');
+            c.style.transform = 'scale(1.05)';
+            setTimeout(() => c.style.transform = 'scale(1)', 200);
         }
 
-        // 重置
         function resetOutfit() {
-            currentOutfit = { dress: null, top: null, bottom: null, shoes: null, accessory: null };
+            currentOutfit = { dress:null, top:null, bottom:null, shoes:null, accessory:null };
             updateDollAppearance();
             document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected'));
         }
 
-        // 分类标签切换
-        document.getElementById('categoryTabs').addEventListener('click', (e) => {
+        document.getElementById('categoryTabs').addEventListener('click', e => {
             if (e.target.classList.contains('tab-btn')) {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
@@ -644,11 +698,8 @@
             }
         });
 
-        // 初始化
         renderItems(currentCategory);
-
-        // 给芭比穿个默认裙子
-        selectItem('dresses', 'd1');
+        updateDollAppearance(); // 显示默认裙子
     </script>
 </body>
 </html>
