@@ -45,7 +45,9 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            pointer-events: none;
         }
+        .doll-svg * { pointer-events: none; }
 
         /* 衣服覆盖层 */
         .clothing-layer {
@@ -84,6 +86,8 @@
         .options-panel {
             width: 100%;
             max-width: 420px;
+            position: relative;
+            z-index: 10;
         }
 
         .category-tabs {
@@ -140,6 +144,7 @@
             border-color: #e91e8c;
             box-shadow: 0 2px 15px rgba(233,30,140,0.35);
         }
+        .item-card * { pointer-events: none; }
         .item-card .icon { font-size: 1.8rem; line-height: 1; }
         .item-card .name { font-size: 0.65rem; color: #666; margin-top: 0.15rem; text-align: center; line-height: 1.2; }
 
@@ -700,6 +705,30 @@
 
         renderItems(currentCategory);
         updateDollAppearance(); // 显示默认裙子
+
+        // 使用事件委托，确保移动端也能点击
+        document.getElementById('itemsGrid').addEventListener('click', function(e) {
+            const card = e.target.closest('.item-card');
+            if (!card) return;
+            const id = card.dataset.id;
+            // 找到对应分类
+            for (const [cat, items] of Object.entries(clothingData)) {
+                const item = items.find(i => i.id === id);
+                if (item) { selectItem(cat, id); return; }
+            }
+        });
+
+        // 移动端 touch 支持
+        document.getElementById('itemsGrid').addEventListener('touchend', function(e) {
+            const card = e.target.closest('.item-card');
+            if (!card) return;
+            e.preventDefault();
+            const id = card.dataset.id;
+            for (const [cat, items] of Object.entries(clothingData)) {
+                const item = items.find(i => i.id === id);
+                if (item) { selectItem(cat, id); return; }
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
