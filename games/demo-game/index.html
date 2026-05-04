@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 示例游戏 - 点击大作战</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, sans-serif;
+            background: #1a1a2e;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 { margin-bottom: 1rem; }
+        .score { font-size: 2rem; margin-bottom: 1rem; }
+        .target {
+            width: 80px;
+            height: 80px;
+            background: #e94560;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: transform 0.1s;
+            user-select: none;
+        }
+        .target:active { transform: scale(0.9); }
+        .back {
+            margin-top: 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌟 点击大作战</h1>
+    <div class="score">得分：<span id="score">0</span></div>
+    <div class="target" id="target">🎯</div>
+    <a class="back" href="../../">← 返回游戏大厅</a>
+    <script>
+        let score = 0;
+        const target = document.getElementById('target');
+        const scoreEl = document.getElementById('score');
+        target.addEventListener('click', () => {
+            score++;
+            scoreEl.textContent = score;
+            target.style.background = `hsl(${Math.random()*360}, 70%, 50%)`;
+        });
+    </script>
+</body>
+</html>
